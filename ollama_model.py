@@ -1,5 +1,5 @@
 # ollama_model.py
-# Author: [River Sookralli]
+# Author: River Sookralli
 
 from ollama import ResponseError, chat
 
@@ -17,8 +17,6 @@ class OllamaModel:
         messages = messages + history
         try:
             response = chat(model=self.model_name, messages=messages)
-        except ConnectionError:
-            return None
-        except ResponseError:
+        except (ConnectionError, ResponseError):
             return None
         return response.message.content
